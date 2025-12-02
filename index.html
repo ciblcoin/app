@@ -254,8 +254,9 @@
             justify-content: center;
             overflow: hidden;
             border-radius: 10px;
-            background-color: white;
+            background-color: #f5f5f5;
             border: 1px solid var(--gray);
+            position: relative;
         }
 
         .box-image, .box-video {
@@ -263,6 +264,37 @@
             height: 100%;
             object-fit: cover;
             border-radius: 10px;
+        }
+
+        .video-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .video-fallback {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+        }
+
+        .video-fallback-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .video-fallback-text {
+            font-size: 0.85rem;
+            line-height: 1.3;
         }
 
         .box-title {
@@ -936,7 +968,9 @@
                     </p>
                 </div>
                 <div class="image-side">
-                    <div id="mediaContainer1" class="media-container"></div>
+                    <div id="mediaContainer1" class="media-container">
+                        <div class="video-loading">Loading video...</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1187,7 +1221,9 @@
                     </p>
                 </div>
                 <div class="image-side">
-                    <div id="mediaContainer2" class="media-container"></div>
+                    <div id="mediaContainer2" class="media-container">
+                        <div class="video-loading">Loading video...</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1224,7 +1260,9 @@
                     </p>
                 </div>
                 <div class="image-side">
-                    <div id="mediaContainer3" class="media-container"></div>
+                    <div id="mediaContainer3" class="media-container">
+                        <div class="video-loading">Loading video...</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1281,12 +1319,114 @@
     </footer>
 
     <script>
-        // Set logo from GitHub
-        document.getElementById('logo').src = 'https://github.com/user-attachments/assets/f8ee2ef9-0440-4101-b359-e6903c2bfe6c';
+        // لینک‌های raw برای ویدیوها از ریپازیتوری شما
+        const videoSources = [
+            {
+                id: 'mediaContainer1',
+                url: 'https://raw.githubusercontent.com/ciblcoin/app/main/public/videos/index1.mp4',
+                title: 'Cibl Introduction',
+                fallbackIcon: '🚀'
+            },
+            {
+                id: 'mediaContainer2',
+                url: 'https://raw.githubusercontent.com/ciblcoin/app/main/public/videos/index2.mp4',
+                title: 'Cibl & Telegram Stars',
+                fallbackIcon: '⭐'
+            },
+            {
+                id: 'mediaContainer3',
+                url: 'https://raw.githubusercontent.com/ciblcoin/app/main/public/videos/index3.mp4',
+                title: 'Cibl Super App',
+                fallbackIcon: '📱'
+            }
+        ];
+
+        function loadVideo(config) {
+            const container = document.getElementById(config.id);
+            
+            const video = document.createElement('video');
+            video.className = 'box-video';
+            video.autoplay = true;
+            video.muted = true;
+            video.loop = true;
+            video.playsInline = true;
+            video.preload = 'auto';
+            
+            const source = document.createElement('source');
+            source.src = config.url;
+            source.type = 'video/mp4';
+            video.appendChild(source);
+            
+            video.onloadeddata = () => {
+                console.log(`Video loaded: ${config.title}`);
+                // ریپلی خودکار هر 10 ثانیه
+                video.addEventListener('timeupdate', function() {
+                    if (this.currentTime >= 10) {
+                        this.currentTime = 0;
+                    }
+                });
+            };
+            
+            video.onerror = (e) => {
+                console.error(`Error loading video: ${config.url}`, e);
+                showVideoFallback(container, config);
+            };
+            
+            // تایم‌اوت برای لود شدن
+            setTimeout(() => {
+                if (video.readyState < 2) { // HAVE_ENOUGH_DATA نیست
+                    if (!video.error) {
+                        showVideoFallback(container, config);
+                    }
+                }
+            }, 5000);
+            
+            container.innerHTML = '';
+            container.appendChild(video);
+        }
         
-        // Fetch real price from DexScreener
+        function showVideoFallback(container, config) {
+            container.innerHTML = `
+                <div class="video-fallback">
+                    <div class="video-fallback-icon">${config.fallbackIcon}</div>
+                    <div class="video-fallback-text" style="font-weight: 600; margin-bottom: 5px;">${config.title}</div>
+                    <div class="video-fallback-text">Video preview</div>
+                    <div class="video-fallback-text" style="font-size: 0.75rem; margin-top: 10px; opacity: 0.7;">
+                        MP4: ${config.url.split('/').pop()}
+                    </div>
+                </div>
+            `;
+        }
+        
+        // لوگو از GitHub
+        document.addEventListener('DOMContentLoaded', function() {
+            // لوگو
+            const logoImg = document.getElementById('logo');
+            logoImg.src = 'https://raw.githubusercontent.com/user-attachments/assets/f8ee2ef9-0440-4101-b359-e6903c2bfe6c';
+            
+            logoImg.onerror = () => {
+                logoImg.src = 'https://via.placeholder.com/45/FFD700/000000?text=CIB';
+            };
+            
+            // ویدیوها
+            videoSources.forEach(config => {
+                loadVideo(config);
+            });
+            
+            // سیستم قیمت
+            fetchRealPrice();
+            setInterval(fetchRealPrice, 1000);
+            
+            // انیمیشن بشکه‌ها
+            const barrelFills = document.querySelectorAll('.barrel-fill');
+            barrelFills.forEach((fill, index) => {
+                const duration = 2 + Math.random() * 2;
+                fill.style.animationDuration = `${duration}s`;
+            });
+        });
+        
+        // سیستم قیمت‌گذاری
         let currentColor = 'green';
-        
         async function fetchRealPrice() {
             try {
                 const response = await fetch('https://api.dexscreener.com/latest/dex/tokens/2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA');
@@ -1296,7 +1436,6 @@
                     const pair = data.pairs[0];
                     const price = parseFloat(pair.priceUsd);
                     const priceChange = parseFloat(pair.priceChange.h24);
-                    
                     updatePriceDisplay(price, priceChange);
                 }
             } catch (error) {
@@ -1308,11 +1447,8 @@
         function simulatePrice() {
             let price = 0.0000000009123;
             let priceChange = (Math.random() * 10 - 5) / 100;
-            
-            // Small random fluctuation
             const randomChange = (Math.random() - 0.5) * 0.000000000001;
             price += randomChange;
-            
             updatePriceDisplay(price, priceChange * 100);
         }
         
@@ -1320,7 +1456,6 @@
             const priceElement = document.getElementById('priceValue');
             const changeElement = document.getElementById('priceChange');
             
-            // Format price with correct decimal places
             let formattedPrice;
             if (price < 0.000001) {
                 formattedPrice = price.toFixed(12);
@@ -1330,10 +1465,8 @@
                 formattedPrice = price.toFixed(6);
             }
             
-            // Remove trailing zeros
             formattedPrice = formattedPrice.replace(/(\.\d*?[1-9])0+$/, '$1').replace(/\.$/, '');
             
-            // Toggle color every second
             currentColor = currentColor === 'green' ? 'red' : 'green';
             
             priceElement.textContent = '$' + formattedPrice;
@@ -1343,59 +1476,6 @@
             changeElement.textContent = `${changeText}${priceChange.toFixed(2)}% (24h)`;
             changeElement.style.color = priceChange >= 0 ? 'var(--green)' : 'var(--red)';
         }
-        
-        // Initialize price
-        fetchRealPrice();
-        // Update price every 1 second with color change
-        setInterval(fetchRealPrice, 1000);
-        
-        // Load media files from GitHub
-        function loadGitHubVideo(containerId, videoUrl) {
-            const container = document.getElementById(containerId);
-            
-            const video = document.createElement('video');
-            video.className = 'box-video';
-            video.autoplay = true;
-            video.muted = true;
-            video.loop = true;
-            video.playsInline = true;
-            
-            const source = document.createElement('source');
-            source.src = videoUrl;
-            source.type = 'video/mp4';
-            video.appendChild(source);
-            
-            video.onerror = function() {
-                container.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; color: #666; font-size: 0.9rem;">Video loading...</div>';
-                // Try again after 2 seconds
-                setTimeout(() => loadGitHubVideo(containerId, videoUrl), 2000);
-            };
-            
-            // Auto replay every 10 seconds
-            video.addEventListener('timeupdate', function() {
-                if (this.currentTime >= 10) {
-                    this.currentTime = 0;
-                }
-            });
-            
-            container.innerHTML = '';
-            container.appendChild(video);
-        }
-        
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Load videos from GitHub
-            loadGitHubVideo('mediaContainer1', 'https://github-production-user-asset-6210df.s3.amazonaws.com/227602511/521314677-d4d2c1a5-0303-4fdd-81cf-99ced4f88d2f.mp4?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20251202%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20251202T150701Z&X-Amz-Expires=300&X-Amz-Signature=92c859a5089e8f96202ffa5c6867635a5478e46b01e7d90ca25c9961fc4c718a&X-Amz-SignedHeaders=host/raw');
-            loadGitHubVideo('mediaContainer2', 'https://github.com/user-attachments/assets/4043fd3f-394b-44c6-8ca8-b71d116c9786/raw');
-            loadGitHubVideo('mediaContainer3', 'https://github.com/user-attachments/assets/408e2ce8-f639-4baa-91b5-78c02922ed60/raw');
-            
-            // Add animation to barrel fills
-            const barrelFills = document.querySelectorAll('.barrel-fill');
-            barrelFills.forEach((fill, index) => {
-                const duration = 2 + Math.random() * 2;
-                fill.style.animationDuration = `${duration}s`;
-            });
-        });
     </script>
 </body>
 </html>
