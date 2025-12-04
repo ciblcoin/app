@@ -21,7 +21,7 @@
             --white: #FFFFFF;
             --gray: #666666;
             --light-gray: #F5F5F5;
-            --box-height: 180px;
+            --box-height: 200px;
             --header-height: 110px;
         }
 
@@ -61,7 +61,16 @@
             position: relative;
         }
 
-        .header-row {
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 50%;
+            margin-bottom: 5px;
+        }
+
+        .header-bottom {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -69,14 +78,22 @@
             height: 50%;
         }
 
-        .header-row.top {
-            height: 45%;
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
         }
 
-        .header-row.bottom {
-            height: 55%;
-            border-top: 2px solid var(--black);
-            padding-top: 8px;
+        .header-right {
+            justify-content: flex-end;
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 20px;
         }
 
         .logo-section {
@@ -122,32 +139,17 @@
             line-height: 1;
         }
 
-        .header-buttons {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            padding: 0 5px;
-            flex-grow: 1;
-            justify-content: center;
-        }
-
-        .header-buttons::-webkit-scrollbar {
-            display: none;
-        }
-
         .header-btn {
             background-color: var(--yellow);
             border: 2px solid var(--black);
             border-radius: 8px;
-            padding: 4px 10px;
+            padding: 4px 12px;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: all 0.2s;
-            min-width: 85px;
+            min-width: 90px;
             text-align: center;
             text-decoration: none;
             color: var(--black);
@@ -160,6 +162,7 @@
 
         .header-btn:hover {
             background-color: var(--dark-yellow);
+            transform: translateY(-1px);
         }
 
         .header-btn.solana {
@@ -170,38 +173,45 @@
         .price-box {
             background-color: var(--white);
             border: 2px solid var(--black);
-            border-radius: 10px;
-            padding: 8px 12px;
+            border-radius: 12px;
+            padding: 12px 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-width: 170px;
-            height: 42px;
+            min-width: 180px;
+            height: 70px;
             margin: 0 15px;
         }
 
         .price-title {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--black);
-            margin-bottom: 2px;
-        }
-
-        .price-label {
-            font-size: 0.7rem;
-            color: var(--gray);
             margin-bottom: 3px;
         }
 
+        .price-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+
         .price-value {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             font-weight: 700;
             transition: color 1s;
+            margin-bottom: 2px;
+        }
+
+        .price-change-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .price-change {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
         }
 
@@ -211,10 +221,10 @@
             border: 2px solid var(--black);
             border-radius: 15px;
             margin: 10px auto;
-            padding: 15px;
+            padding: 20px;
             width: 99%;
             height: var(--box-height);
-            min-height: 180px;
+            min-height: 200px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -224,7 +234,7 @@
         .half-box {
             width: 49.4%;
             height: var(--box-height);
-            min-height: 180px;
+            min-height: 200px;
         }
 
         .box-content {
@@ -233,7 +243,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
+            gap: 20px;
         }
 
         .text-side {
@@ -242,7 +252,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-right: 10px;
+            padding-right: 15px;
             overflow: hidden;
         }
 
@@ -299,23 +309,24 @@
 
         .box-title {
             font-family: 'DynaPuff', cursive;
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             color: var(--black);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
         .box-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
             color: var(--black);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .box-text {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: var(--black);
-            line-height: 1.4;
+            line-height: 1.5;
+            text-align: justify;
             overflow-y: auto;
         }
 
@@ -323,7 +334,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             flex-wrap: wrap;
         }
 
@@ -334,14 +345,14 @@
         .green-text {
             color: var(--green);
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .coming-soon {
             color: var(--green);
             font-weight: 600;
-            font-size: 1.2rem;
-            margin-bottom: 8px;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
         }
 
         /* Liquidity Pool Styles - Barrel Design */
@@ -355,10 +366,10 @@
         }
 
         .pool-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--black);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             text-align: center;
         }
 
@@ -366,13 +377,13 @@
             display: flex;
             justify-content: space-around;
             width: 100%;
-            height: 100px;
+            height: 110px;
             align-items: flex-end;
         }
 
         .barrel {
-            width: 50px;
-            height: 80px;
+            width: 60px;
+            height: 100px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -380,18 +391,18 @@
         }
 
         .barrel-label {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--black);
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .barrel-body {
-            width: 50px;
-            height: 80px;
+            width: 60px;
+            height: 100px;
             background-color: var(--white);
             border: 2px solid var(--black);
-            border-radius: 10px;
+            border-radius: 12px;
             position: relative;
             overflow: hidden;
         }
@@ -401,7 +412,7 @@
             bottom: 0;
             width: 100%;
             background-color: #00CED1;
-            border-radius: 8px 8px 0 0;
+            border-radius: 10px 10px 0 0;
             animation: barrelPulse 3s infinite alternate;
         }
 
@@ -417,7 +428,7 @@
             height: 100%;
             align-items: center;
             justify-content: space-between;
-            gap: 15px;
+            gap: 20px;
         }
 
         .chart-side {
@@ -430,10 +441,10 @@
         }
 
         .chart-container {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             position: relative;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .chart-circle {
@@ -455,8 +466,8 @@
         }
 
         .chart-inner-circle {
-            width: 70px;
-            height: 70px;
+            width: 75px;
+            height: 75px;
             background-color: var(--light-yellow);
             border-radius: 50%;
             position: absolute;
@@ -470,13 +481,13 @@
         }
 
         .chart-total {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--black);
         }
 
         .chart-label {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--gray);
         }
 
@@ -487,14 +498,14 @@
             flex-direction: column;
             justify-content: center;
             overflow-y: auto;
-            padding-right: 8px;
+            padding-right: 10px;
         }
 
         .tokenomics-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 6px;
-            padding: 4px;
+            margin-bottom: 7px;
+            padding: 5px;
             border-radius: 5px;
         }
 
@@ -502,36 +513,37 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            margin-right: 8px;
+            margin-right: 10px;
             margin-top: 3px;
             flex-shrink: 0;
         }
 
         .token-percent {
             font-weight: 700;
-            font-size: 0.9rem;
-            min-width: 45px;
+            font-size: 0.95rem;
+            min-width: 50px;
             flex-shrink: 0;
         }
 
         .token-amount {
             font-weight: 600;
-            font-size: 0.8rem;
-            min-width: 70px;
+            font-size: 0.85rem;
+            min-width: 75px;
             color: var(--gray);
             flex-shrink: 0;
         }
 
         .token-desc {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--black);
-            line-height: 1.2;
+            line-height: 1.3;
+            text-align: justify;
         }
 
         .token-title {
             font-weight: 700;
-            font-size: 0.85rem;
-            margin-bottom: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
         }
 
         /* Roadmap Styles */
@@ -546,9 +558,9 @@
 
         .roadmap-title {
             font-family: 'DynaPuff', cursive;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--black);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-weight: 600;
         }
 
@@ -568,35 +580,35 @@
         .roadmap-item {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .pencil-icon {
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             position: relative;
-            margin-right: 12px;
+            margin-right: 15px;
             flex-shrink: 0;
         }
 
         .pencil-body {
-            width: 25px;
-            height: 35px;
+            width: 30px;
+            height: 40px;
             position: absolute;
             top: 0;
             left: 0;
-            border-radius: 3px;
+            border-radius: 4px;
         }
 
         .pencil-tip {
             width: 0;
             height: 0;
-            border-left: 8px solid var(--black);
-            border-top: 17.5px solid transparent;
-            border-bottom: 17.5px solid transparent;
+            border-left: 10px solid var(--black);
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
             position: absolute;
             top: 0;
-            right: -8px;
+            right: -10px;
         }
 
         .pencil-number {
@@ -606,15 +618,15 @@
             transform: translate(-50%, -50%);
             font-weight: 700;
             color: var(--white);
-            font-size: 1rem;
+            font-size: 1.2rem;
         }
 
         .roadmap-text {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
-        /* Footer Styles - 6 Rows */
+        /* Footer Styles */
         .footer {
             background-color: var(--yellow);
             border: 3px solid var(--black);
@@ -622,31 +634,32 @@
             margin: 10px auto;
             width: 99%;
             height: var(--box-height);
-            min-height: 180px;
+            min-height: 200px;
             display: flex;
-            flex-direction: column;
-            padding: 12px 15px;
+            padding: 20px;
             position: relative;
+            align-items: flex-start;
         }
 
-        .footer-row {
+        .footer-left {
+            width: 30%;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 16.66%;
-            width: 100%;
-            padding: 2px 0;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            height: 100%;
         }
 
         .footer-logo-section {
             display: flex;
-            align-items: center;
-            gap: 8px;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 15px;
         }
 
         .footer-logo {
             font-family: 'DynaPuff', cursive;
-            font-size: 1.6rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--black);
             letter-spacing: 1px;
@@ -656,43 +669,65 @@
                 -1.5px -1.5px 0 var(--white),
                 1.5px -1.5px 0 var(--white),
                 -1.5px 1.5px 0 var(--white);
+            margin-bottom: 5px;
         }
 
         .footer-ticker {
             font-family: 'DynaPuff', cursive;
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--blue);
             line-height: 1;
-        }
-
-        .footer-link {
-            color: var(--blue);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem;
-        }
-
-        .footer-link:hover {
-            text-decoration: underline;
+            margin-bottom: 15px;
         }
 
         .footer-address {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--gray);
             word-break: break-all;
+            margin-top: auto;
         }
 
-        .footer-links {
+        .footer-center {
+            width: 40%;
             display: flex;
-            gap: 15px;
+            flex-direction: column;
             align-items: center;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .footer-social-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .footer-social-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--black);
+            margin-bottom: 10px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-social-column {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
         }
 
         .footer-social-link {
             color: var(--black);
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             transition: color 0.2s;
         }
 
@@ -701,21 +736,52 @@
             text-decoration: underline;
         }
 
+        .footer-right {
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .footer-links-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
         .footer-site-link {
             color: var(--blue);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .footer-site-link:hover {
             text-decoration: underline;
         }
 
+        .footer-contact-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+            margin-top: auto;
+        }
+
+        .footer-contact-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--black);
+        }
+
         .footer-email {
             color: var(--blue);
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .footer-email:hover {
@@ -723,11 +789,12 @@
         }
 
         .footer-copyright {
-            font-size: 0.85rem;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
             color: var(--gray);
-            text-align: center;
-            width: 100%;
-            margin-top: 5px;
         }
 
         /* Animations */
@@ -745,18 +812,23 @@
         @media (max-width: 1200px) {
             .header {
                 height: auto;
-                min-height: 100px;
-                padding: 8px 10px;
+                min-height: 130px;
+                padding: 10px;
             }
             
-            .header-row {
+            .header-top, .header-bottom {
                 flex-wrap: wrap;
                 height: auto;
+                margin-bottom: 8px;
+            }
+            
+            .header-left, .header-center, .header-right {
+                justify-content: center;
                 margin-bottom: 5px;
             }
             
             .price-box {
-                margin: 5px auto;
+                margin: 10px auto;
                 order: 3;
                 width: 100%;
                 max-width: 200px;
@@ -764,58 +836,87 @@
             
             .box, .half-box {
                 height: auto;
-                min-height: 200px;
+                min-height: 220px;
             }
             
             .half-box {
                 width: 99%;
                 margin-bottom: 10px;
             }
+            
+            .footer {
+                height: auto;
+                min-height: 250px;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-left, .footer-center, .footer-right {
+                width: 100%;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            
+            .footer-logo-section, .footer-social-section, .footer-links-section {
+                align-items: center;
+                text-align: center;
+            }
+            
+            .footer-contact-section {
+                align-items: center;
+            }
         }
 
         @media (max-width: 768px) {
             .header {
-                min-height: 140px;
+                min-height: 180px;
             }
             
-            .header-row.top, .header-row.bottom {
-                flex-wrap: wrap;
+            .header-top, .header-bottom {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .header-left, .header-right {
                 justify-content: center;
+                width: 100%;
+                gap: 8px;
             }
             
-            .header-buttons {
-                gap: 4px;
-                padding: 0 2px;
+            .header-center {
+                order: 3;
+                width: 100%;
+                margin: 10px 0;
             }
             
             .header-btn {
-                min-width: 70px;
-                font-size: 0.7rem;
-                padding: 3px 6px;
-                height: 28px;
+                min-width: 80px;
+                font-size: 0.8rem;
+                padding: 3px 8px;
+                height: 30px;
             }
             
             .brand-name {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
             }
             
             .brand-ticker {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
             
             .price-box {
-                min-width: 150px;
-                padding: 6px 10px;
-                height: 38px;
+                min-width: 180px;
+                padding: 10px 12px;
+                height: 65px;
             }
             
             .price-value {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
             
             .box-content {
                 flex-direction: column;
-                gap: 10px;
+                gap: 15px;
             }
             
             .text-side, .image-side {
@@ -824,7 +925,7 @@
             }
             
             .image-side {
-                height: 120px;
+                height: 150px;
                 margin-top: 10px;
             }
             
@@ -837,8 +938,8 @@
             }
             
             .tokenomics-list {
-                margin-top: 10px;
-                max-height: 250px;
+                margin-top: 15px;
+                max-height: 280px;
             }
             
             .roadmap-items {
@@ -850,66 +951,72 @@
             }
             
             .barrel-container {
-                height: 80px;
+                height: 100px;
             }
             
             .barrel {
-                width: 40px;
-                height: 70px;
+                width: 50px;
+                height: 90px;
             }
             
             .barrel-body {
-                width: 40px;
-                height: 70px;
+                width: 50px;
+                height: 90px;
             }
             
             .footer {
-                height: auto;
-                min-height: 200px;
+                min-height: 350px;
             }
             
-            .footer-row {
-                flex-wrap: wrap;
+            .footer-social-links {
                 justify-content: center;
-                gap: 10px;
-                margin-bottom: 5px;
             }
         }
 
         @media (max-width: 480px) {
             .header {
-                min-height: 160px;
+                min-height: 220px;
             }
             
             .header-btn {
-                min-width: 65px;
-                font-size: 0.65rem;
-                padding: 2px 5px;
-                height: 26px;
+                min-width: 75px;
+                font-size: 0.75rem;
+                padding: 3px 6px;
+                height: 28px;
             }
             
             .box-title {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
             
             .box-subtitle {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .roadmap-title {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
             }
             
             .pool-title {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             .footer-logo {
-                font-size: 1.4rem;
+                font-size: 1.8rem;
             }
             
             .footer-ticker {
-                font-size: 1.2rem;
+                font-size: 1.6rem;
+            }
+            
+            .barrel {
+                width: 45px;
+                height: 80px;
+            }
+            
+            .barrel-body {
+                width: 45px;
+                height: 80px;
             }
         }
     </style>
@@ -917,36 +1024,48 @@
 <body>
     <!-- Header Section - Compact Two Rows -->
     <header class="header container">
-        <div class="header-row top">
-            <div class="logo-section">
-                <img id="logo" class="logo-img" src="" alt="Cibl Logo">
-                <div class="brand-text">
-                    <div class="brand-name">Cibl</div>
-                    <div class="brand-ticker">CIB</div>
+        <div class="header-top">
+            <div class="header-left">
+                <div class="logo-section">
+                    <img id="logo" class="logo-img" src="https://raw.githubusercontent.com/user-attachments/assets/f8ee2ef9-0440-4101-b359-e6903c2bfe6c" alt="Cibl Logo">
+                    <div class="brand-text">
+                        <div class="brand-name">Cibl</div>
+                        <div class="brand-ticker">CIB</div>
+                    </div>
+                </div>
+                <a href="https://solscan.io/token/2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA" target="_blank" class="header-btn solana">SOLANA</a>
+            </div>
+            
+            <div class="header-center">
+                <div class="price-box">
+                    <div class="price-title">Cibl ($CIB)</div>
+                    <div class="price-label">Live Price</div>
+                    <div id="priceValue" class="price-value">$0.0000000009123</div>
+                    <div class="price-change-container">
+                        <div id="priceChange" class="price-change">+2.45%</div>
+                        <div style="font-size: 0.75rem; color: var(--gray);">(24h)</div>
+                    </div>
                 </div>
             </div>
             
-            <div class="price-box">
-                <div class="price-title">Cibl ($CIB)</div>
-                <div class="price-label">Live Price</div>
-                <div id="priceValue" class="price-value">$0.0000000009123</div>
-                <div id="priceChange" class="price-change">+2.45% (24h)</div>
+            <div class="header-right">
+                <a href="airdrop.html" class="header-btn">AIRDROP</a>
+                <a href="swap.html" class="header-btn">SWAP</a>
+                <a href="https://phantom.com/tokens/solana/2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA?referralId=2325rur2wft" target="_blank" class="header-btn">BUY CIB</a>
             </div>
-            
-            <a href="https://solscan.io/token/2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA" target="_blank" class="header-btn solana">SOLANA</a>
         </div>
         
-        <div class="header-row bottom">
-            <div class="header-buttons">
+        <div class="header-bottom">
+            <div class="header-left">
                 <a href="#" class="header-btn">HOME</a>
                 <a href="tokenomics.html" class="header-btn">TOKENOMICS</a>
                 <a href="roadmap.html" class="header-btn">ROADMAP</a>
-                <a href="airdrop.html" class="header-btn">AIRDROP</a>
+            </div>
+            
+            <div class="header-right">
                 <a href="whitepaper.html" class="header-btn">WHITEPAPER</a>
                 <a href="dao.html" class="header-btn">DAO</a>
                 <a href="marketing.html" class="header-btn">MARKETING</a>
-                <a href="swap.html" class="header-btn">SWAP</a>
-                <a href="https://phantom.com/tokens/solana/2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA?referralId=2325rur2wft" target="_blank" class="header-btn">BUY CIB</a>
             </div>
         </div>
     </header>
@@ -1268,54 +1387,53 @@
         </section>
     </main>
 
-    <!-- Footer - 6 Rows -->
+    <!-- Footer -->
     <footer class="footer container">
-        <div class="footer-row">
+        <div class="footer-left">
             <div class="footer-logo-section">
                 <div class="footer-logo">Cibl</div>
                 <div class="footer-ticker">CIB</div>
             </div>
-            <a href="https://solscan.io/token/2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA" target="_blank" class="footer-link">SOLANA</a>
             <div class="footer-address">Contract Address: 2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA</div>
         </div>
         
-        <div class="footer-row">
-            <span class="footer-social-link" style="font-weight: 700;">Community:</span>
-            <div class="footer-links">
-                <a href="https://x.com/CiblCrypto" target="_blank" class="footer-social-link">X</a>
-                <a href="https://www.youtube.com/@ciblcoin" target="_blank" class="footer-social-link">YouTube</a>
-                <a href="https://www.instagram.com/ciblcoin" target="_blank" class="footer-social-link">Instagram</a>
-                <a href="https://www.facebook.com/CiblCoin" target="_blank" class="footer-social-link">Facebook</a>
-                <a href="https://dex.coinmarketcap.com/token/solana/2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA/" target="_blank" class="footer-social-link">CoinMarketCap</a>
+        <div class="footer-center">
+            <div class="footer-social-section">
+                <div class="footer-social-title">Community:</div>
+                <div class="footer-social-links">
+                    <div class="footer-social-column">
+                        <a href="https://x.com/CiblCrypto" target="_blank" class="footer-social-link">X</a>
+                        <a href="https://www.youtube.com/@ciblcoin" target="_blank" class="footer-social-link">YouTube</a>
+                        <a href="https://www.instagram.com/ciblcoin" target="_blank" class="footer-social-link">Instagram</a>
+                        <a href="https://www.facebook.com/CiblCoin" target="_blank" class="footer-social-link">Facebook</a>
+                        <a href="https://dex.coinmarketcap.com/token/solana/2Lpgt5teMe4SPp1G8x1URBk6dPRoimftdANmAsFDvkPA/" target="_blank" class="footer-social-link">CoinMarketCap</a>
+                    </div>
+                    <div class="footer-social-column">
+                        <a href="https://t.me/CIBLcoin" target="_blank" class="footer-social-link">Telegram</a>
+                        <a href="https://discord.gg/9HeTsHJcTq" target="_blank" class="footer-social-link">Discord</a>
+                        <a href="https://www.tiktok.com/@ciblcoin" target="_blank" class="footer-social-link">TikTok</a>
+                        <a href="http://cibl.medium.com" target="_blank" class="footer-social-link">Medium</a>
+                        <a href="https://github.com/ciblcoin" target="_blank" class="footer-social-link">GitHub</a>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <div class="footer-row">
-            <div class="footer-links">
-                <a href="https://t.me/CIBLcoin" target="_blank" class="footer-social-link">Telegram</a>
-                <a href="https://discord.gg/9HeTsHJcTq" target="_blank" class="footer-social-link">Discord</a>
-                <a href="https://www.tiktok.com/@ciblcoin" target="_blank" class="footer-social-link">TikTok</a>
-                <a href="http://cibl.medium.com" target="_blank" class="footer-social-link">Medium</a>
-                <a href="https://github.com/ciblcoin" target="_blank" class="footer-social-link">GitHub</a>
+        <div class="footer-right">
+            <div class="footer-links-section">
+                <a href="blog.html" class="footer-site-link">Blog</a>
+                <a href="https://cbl.ag" target="_blank" class="footer-site-link">www.cbl.ag</a>
+                <a href="https://cibl.app" target="_blank" class="footer-site-link">www.cibl.app</a>
+                <a href="https://ciblcoin.com" target="_blank" class="footer-site-link">www.ciblcoin.com</a>
+            </div>
+            <div class="footer-contact-section">
+                <div class="footer-contact-title">Contact:</div>
+                <a href="mailto:CIB@ciblcoin.com" class="footer-email">CIB@ciblcoin.com</a>
+                <a href="mailto:email@cibl.app" class="footer-email">email@cibl.app</a>
             </div>
         </div>
         
-        <div class="footer-row">
-            <a href="blog.html" class="footer-site-link">Blog</a>
-            <a href="https://cbl.ag" target="_blank" class="footer-site-link">www.cbl.ag</a>
-            <a href="https://cibl.app" target="_blank" class="footer-site-link">www.cibl.app</a>
-            <a href="https://ciblcoin.com" target="_blank" class="footer-site-link">www.ciblcoin.com</a>
-        </div>
-        
-        <div class="footer-row">
-            <span style="font-weight: 700; font-size: 0.85rem;">Contact:</span>
-            <a href="mailto:CIB@ciblcoin.com" class="footer-email">CIB@ciblcoin.com</a>
-            <a href="mailto:email@cibl.app" class="footer-email">email@cibl.app</a>
-        </div>
-        
-        <div class="footer-row">
-            <div class="footer-copyright">Cibl@2025</div>
-        </div>
+        <div class="footer-copyright">Cibl@2025</div>
     </footer>
 
     <script>
@@ -1374,7 +1492,7 @@
             
             // تایم‌اوت برای لود شدن
             setTimeout(() => {
-                if (video.readyState < 2) { // HAVE_ENOUGH_DATA نیست
+                if (video.readyState < 2) {
                     if (!video.error) {
                         showVideoFallback(container, config);
                     }
@@ -1397,33 +1515,6 @@
                 </div>
             `;
         }
-        
-        // لوگو از GitHub
-        document.addEventListener('DOMContentLoaded', function() {
-            // لوگو
-            const logoImg = document.getElementById('logo');
-            logoImg.src = 'https://raw.githubusercontent.com/user-attachments/assets/f8ee2ef9-0440-4101-b359-e6903c2bfe6c';
-            
-            logoImg.onerror = () => {
-                logoImg.src = 'https://via.placeholder.com/45/FFD700/000000?text=CIB';
-            };
-            
-            // ویدیوها
-            videoSources.forEach(config => {
-                loadVideo(config);
-            });
-            
-            // سیستم قیمت
-            fetchRealPrice();
-            setInterval(fetchRealPrice, 1000);
-            
-            // انیمیشن بشکه‌ها
-            const barrelFills = document.querySelectorAll('.barrel-fill');
-            barrelFills.forEach((fill, index) => {
-                const duration = 2 + Math.random() * 2;
-                fill.style.animationDuration = `${duration}s`;
-            });
-        });
         
         // سیستم قیمت‌گذاری
         let currentColor = 'green';
@@ -1473,9 +1564,27 @@
             priceElement.style.color = currentColor === 'green' ? 'var(--green)' : 'var(--red)';
             
             const changeText = priceChange >= 0 ? '+' : '';
-            changeElement.textContent = `${changeText}${priceChange.toFixed(2)}% (24h)`;
+            changeElement.textContent = `${changeText}${priceChange.toFixed(2)}%`;
             changeElement.style.color = priceChange >= 0 ? 'var(--green)' : 'var(--red)';
         }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // ویدیوها
+            videoSources.forEach(config => {
+                loadVideo(config);
+            });
+            
+            // سیستم قیمت
+            fetchRealPrice();
+            setInterval(fetchRealPrice, 1000);
+            
+            // انیمیشن بشکه‌ها
+            const barrelFills = document.querySelectorAll('.barrel-fill');
+            barrelFills.forEach((fill, index) => {
+                const duration = 2 + Math.random() * 2;
+                fill.style.animationDuration = `${duration}s`;
+            });
+        });
     </script>
 </body>
 </html>
